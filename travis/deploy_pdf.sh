@@ -16,5 +16,5 @@ if [[ "${TRAVIS_OS_NAME}" == "linux" && "${TRAVIS_BRANCH}" == "master" && "${TRA
   sudo git stash pop
   sudo git add scala_text.pdf
   sudo git commit -a -m "auto commit on travis $TRAVIS_JOB_NUMBER $TRAVIS_COMMIT"
-  git push git@github.com:scalajp/scala_text_pdf.git gh-pages:gh-pages
+  git push git@github.com:scala-text/scala_text_pdf.git gh-pages:gh-pages
 fi
