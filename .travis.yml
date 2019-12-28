@@ -2,7 +2,6 @@ language: generic
 os:
   - linux
 dist: bionic
-sudo: required
 cache:
   directories:
     - "$HOME/.ivy2/cache"
