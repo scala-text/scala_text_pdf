@@ -17,11 +17,12 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+  - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
 install:
-  - docker-compose pull
+  - docker-compose pull scala-text-pdf-compile
   - docker-compose build
 script:
-  - docker-compose up --exit-code-from scala-text-pdf-compile
+  - docker-compose up --abort-on-container-exit
 before_cache:
   - find $HOME/.sbt -name "*.lock" | sudo xargs rm
   - find $HOME/.ivy2 -name "ivydata-*.properties" | sudo xargs rm
