@@ -1,4 +1,4 @@
-FROM pandoc/core:2.7.3
+FROM pandoc/core:2.9.1
 
 MAINTAINER yyu <yyu [at] mental.poker>
 
@@ -36,7 +36,7 @@ ENV PERSISTENT_DEPS \
     ca-certificates
 
 
-ENV PATH $TEXLIVE_PATH/bin/x86_64-linux:/bin:$PATH
+ENV PATH $TEXLIVE_PATH/bin/x86_64-linux:$TEXLIVE_PATH/bin/x86_64-linuxmusl:/bin:$PATH
 
 RUN apk upgrade --update
 
