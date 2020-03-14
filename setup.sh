@@ -5,7 +5,7 @@ set -e
 git submodule update --init
 
 cd ./scala_text
-../sbt tut
+../sbt mdoc
 cd ..
 cp ./scala_text/book.json ./
 cp -r ./scala_text/src/img ./
