@@ -1,7 +1,7 @@
 Scala Text PDF
 ========================
 
-[![Build Status](https://travis-ci.org/scala-text/scala_text_pdf.svg?branch=master)](https://travis-ci.org/scala-text/scala_text_pdf)
+[![Build Status](https://travis-ci.com/scala-text/scala_text_pdf.svg?branch=master)](https://travis-ci.com/scala-text/scala_text_pdf)
 
 [Scala Text](https://github.com/scala-text/scala_text)のPDF版です。
 
