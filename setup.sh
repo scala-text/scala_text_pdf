@@ -21,9 +21,9 @@ if [[ ! -d "./target" ]]; then
   mkdir target
 fi
 
-for f in ./scala_text/gitbook/*.md
+for f in ./scala_text/honkit/*.md
 do
-  if [[ $f =~ \./scala_text/gitbook/(.*)\.md ]]; then
+  if [[ $f =~ \./scala_text/honkit/(.*)\.md ]]; then
     cp $f ./target/
     FILENAME="${BASH_REMATCH[1]}.md" pandoc -o "./target/${BASH_REMATCH[1]}.tex" -f markdown_github+footnotes+header_attributes-hard_line_breaks-intraword_underscores --pdf-engine=lualatex --top-level-division=chapter --listings --filter ./filter.py $f
   fi
