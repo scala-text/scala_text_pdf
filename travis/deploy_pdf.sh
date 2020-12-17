@@ -7,8 +7,8 @@ if [[ "${TRAVIS_OS_NAME}" == "linux" && "${TRAVIS_BRANCH}" == "master" && "${TRA
   openssl aes-256-cbc -pass "pass:$SERVER_KEY" -pbkdf2 -in ./travis/deploy_key.enc -d -a -out deploy.key
   cp deploy.key ~/.ssh/
   chmod 600 ~/.ssh/deploy.key
-  git config --global user.email "mizukota@gmail.com"
-  git config --global user.name "Kota Mizushima"
+  git config --global user.email "74845010+scala-text-bot[bot]@users.noreply.github.com"
+  git config --global user.name "scala-text-bot[bot]"
   git fetch origin gh-pages:gh-pages
   sudo git stash -u
   sudo git checkout gh-pages
