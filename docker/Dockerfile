@@ -1,4 +1,4 @@
-FROM pandoc/core:2.9.1
+FROM pandoc/core:2.11
 
 MAINTAINER yyu <yyu [at] mental.poker>
 
@@ -23,8 +23,7 @@ ENV FONT_PATH /usr/share/fonts/
 
 ENV PERSISTENT_DEPS \
     openjdk8 \
-    python \
-    py2-pip \
+    py-pip \
     wget \
     make \
     perl \
@@ -46,6 +45,7 @@ RUN apk add --no-cache --virtual .persistent-deps $PERSISTENT_DEPS
 # Setup fonts
 RUN mkdir -p $FONT_PATH && \
     apk add --no-cache --virtual .font-deps $FONT_DEPS && \
+    # Source Code Pro
     wget https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.zip && \
       unzip 1.050R-it.zip && \
       cp source-code-pro-2.030R-ro-1.050R-it/OTF/*.otf $FONT_PATH && \
@@ -74,7 +74,9 @@ RUN apk add --no-cache --virtual .texlive-deps $TEXLIVE_DEPS && \
       -profile /tmp/install-tl-unx/texlive.profile && \
     tlmgr install latexmk collection-luatex collection-langjapanese \
       collection-fontsrecommended filehook type1cm mdframed needspace \
-      fncychap everyhook svn-prov letltxmacro zref && \
+      fncychap everyhook svn-prov letltxmacro zref sourcesanspro \
+      cm-unicode sourceserifpro haranoaji && \
+    luaotfload-tool -u -vvv && \
     rm -fr /tmp/install-tl-unx && \
     apk del .texlive-deps
 
@@ -82,4 +84,4 @@ VOLUME ["/workdir", "/root/.sbt", "/root/.ivy2"]
 
 WORKDIR /workdir
 
-ENTRYPOINT ["/bin/bash", "-c", "./setup.sh && USE_IPAFONT=true make"]
+ENTRYPOINT ["/bin/bash", "-c", "./setup.sh && make"]
