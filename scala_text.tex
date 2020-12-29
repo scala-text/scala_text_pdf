@@ -39,19 +39,13 @@
 
 \usepackage{luacode}
 
-\begin{luacode*}
-  USE_IPAFONT = os.getenv"USE_IPAFONT"
-  USE_YUFONT = os.getenv"USE_YUFONT"
-  
-  if USE_YUFONT == "true" then
-    tex.sprint("\\AtBeginDocument{\\usepackage[yu-osx, deluxe, expert]{luatexja-preset}}")
-  elseif USE_IPAFONT == "true" then
-    tex.sprint("\\AtBeginDocument{\\usepackage[ipaex, deluxe, expert]{luatexja-preset}}")
-  else
-    tex.sprint("\\AtBeginDocument{\\usepackage[hiragino-pro, deluxe, expert]{luatexja-preset}}")
-  end
-\end{luacode*}
+% 欧文のフォント設定
+\usepackage[default, regular, bold]{sourcesanspro}
+\usepackage[default, regular, bold]{sourceserifpro}
+\setmonofont{CMU Typewriter Text}
 
+% 日本語フォント設定
+\usepackage[haranoaji, deluxe]{luatexja-preset}
 \usepackage[centering]{geometry}
 
 \usepackage[%
@@ -63,7 +57,7 @@
   bookmarksnumbered=true,
   bookmarkstype=toc,
   bookmarksopen=true,
-  pdfauthor={株式会社ドワンゴ},
+  pdfauthor={Japan Scala Association},
   pdftitle={Scala Text}]{hyperref}
 
 \usepackage{xcolor}
