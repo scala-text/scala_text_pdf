@@ -12,7 +12,10 @@ def mkInputListings(src):
     return RawInline('latex', "\\lstinputlisting[style=scala]{" + src + "}")
 
 def mkIncludegraphics(src):
-    return RawInline('latex', "\\includegraphics{img/" + src + "}")
+    if src == '88x31.png':
+        return RawInline('latex', "\\includegraphics{pdf/by-nc-sa.pdf}")
+    else:
+        return RawInline('latex', "\\includegraphics{img/" + src + "}")
 
 def mkRef(src):
     return RawInline('latex', "\\ref{" + src + u"}章")
