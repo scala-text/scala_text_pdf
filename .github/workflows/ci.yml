@@ -35,7 +35,6 @@ jobs:
       with:
         name: scala_text pdf
         path: scala_text.pdf
-      if: ${{ github.ref == 'refs/heads/master' }}
 
   release:
     name: Publish artifact to gh-pages
