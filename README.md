@@ -22,8 +22,6 @@ Scala Text PDF
 $ docker-compose up
 ```
 
-ただし、標準でIPAフォントを利用してコンパイルが行なわれます。
-
 ## ライセンス
 
 [Scala Text](https://github.com/scala-text/scala_text)のライセンスを継承し
