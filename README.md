@@ -1,7 +1,7 @@
 Scala Text PDF
 ========================
 
-![CI](https://github.com/scala-text/scala_text_pdf/workflows/CI/badge.svg)
+[![CI](https://github.com/scala-text/scala_text_pdf/workflows/CI/badge.svg)](https://github.com/scala-text/scala_text_pdf/actions)
 
 [Scala Text](https://github.com/scala-text/scala_text)のPDF版です。
 
