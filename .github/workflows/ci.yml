@@ -33,7 +33,7 @@ jobs:
       if: ${{ github.ref == 'refs/heads/master' }}
 
     - name: Push PDF file
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: scala_text pdf
         path: scala_text.pdf
