@@ -53,7 +53,7 @@ jobs:
           path: ./build/
 
       - name: Deploy to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@v4.3.4
         with:
           branch: gh-pages
           folder: build
