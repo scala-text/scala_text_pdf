@@ -46,10 +46,10 @@ RUN apk add --no-cache --virtual .persistent-deps $PERSISTENT_DEPS
 RUN mkdir -p $FONT_PATH && \
     apk add --no-cache --virtual .font-deps $FONT_DEPS && \
     # Source Code Pro
-    wget https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.zip && \
-      unzip 1.050R-it.zip && \
-      cp source-code-pro-2.030R-ro-1.050R-it/OTF/*.otf $FONT_PATH && \
-      rm -rf 1.050R-it.zip source-code-pro-2.030R-ro-1.050R-it && \
+    wget "https://github.com/adobe-fonts/source-code-pro/releases/download/2.038R-ro%2F1.058R-it%2F1.018R-VAR/OTF-source-code-pro-2.038R-ro-1.058R-it.zip" && \
+      unzip OTF-source-code-pro-2.038R-ro-1.058R-it.zip -d source-code-pro && \
+      cp source-code-pro/*.otf $FONT_PATH && \
+      rm -rf OTF-source-code-pro-2.038R-ro-1.058R-it.zip source-code-pro && \
     fc-cache -f -v && \
     apk del .font-deps 
 
