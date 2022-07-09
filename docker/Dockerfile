@@ -1,4 +1,4 @@
-FROM pandoc/core:2.16
+FROM pandoc/core:2.18
 
 MAINTAINER yyu <yyu [at] mental.poker>
 
