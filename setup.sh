@@ -31,7 +31,7 @@ for f in ./scala_text/honkit/*.md
 do
   if [[ $f =~ \./scala_text/honkit/(.*)\.md ]]; then
     cp $f ./target/
-    FILENAME="${BASH_REMATCH[1]}.md" pandoc -o "./target/${BASH_REMATCH[1]}.tex" -f markdown_github+footnotes+header_attributes-hard_line_breaks-intraword_underscores --pdf-engine=lualatex --top-level-division=chapter --listings --filter ./python/filter.py $f
+    FILENAME="${BASH_REMATCH[1]}.md" pandoc -o "./target/${BASH_REMATCH[1]}.tex" -f gfm+footnotes+header_attributes-hard_line_breaks-intraword_underscores --pdf-engine=lualatex --top-level-division=chapter --listings --filter ./python/filter.py $f
   fi
 done
 
