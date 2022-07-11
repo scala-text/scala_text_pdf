@@ -1,6 +1,6 @@
-FROM pandoc/core:2.18
+FROM alpine:3.16
 
-MAINTAINER yyu <yyu [at] mental.poker>
+LABEL maintainer="YOSHIMRUA Hikaru <yyu [at] mental.poker>"
 
 ENV TEXLIVE_DEPS \
     xz \
@@ -20,6 +20,12 @@ ENV FONT_DEPS \
     fontconfig-dev
 
 ENV FONT_PATH /usr/share/fonts/
+
+ARG TARGETARCH
+
+ENV PANDOC_VERSION 2.18
+ENV PANDOC_DOWNLOAD_URL https://github.com/jgm/pandoc/releases/download/$PANDOC_VERSION/pandoc-$PANDOC_VERSION-linux-$TARGETARCH.tar.gz
+ENV PANDOC_ROOT /usr/local/bin/pandoc
 
 ENV PERSISTENT_DEPS \
     openjdk8 \
@@ -52,6 +58,11 @@ RUN mkdir -p $FONT_PATH && \
       rm -rf OTF-source-code-pro-2.038R-ro-1.058R-it.zip source-code-pro && \
     fc-cache -f -v && \
     apk del .font-deps 
+
+# Install Pandoc
+RUN wget -qO- "$PANDOC_DOWNLOAD_URL" | tar -xzf - && \
+    cp pandoc-$PANDOC_VERSION/bin/pandoc $PANDOC_ROOT && \
+    rm -Rf pandoc-$PANDOC_VERSION/
 
 # Install Pandocfilter
 COPY requirements.txt ./
