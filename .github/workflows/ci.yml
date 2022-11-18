@@ -27,17 +27,13 @@ jobs:
       with:
         file: ./docker/Dockerfile
         platforms: linux/amd64
-        push: true
+        push: ${{ github.ref == 'refs/heads/master' }}
         tags: ghcr.io/scala-text/scala-text-pdf:latest
 
     - name: PDF build
       run: |
         sudo chown -R root:root $GITHUB_WORKSPACE
         docker-compose up --abort-on-container-exit
-      
-    - name: Push Docker image
-      run: docker-compose push
-      if: ${{ github.ref == 'refs/heads/master' }}
 
     - name: Push PDF file
       uses: actions/upload-artifact@v3
