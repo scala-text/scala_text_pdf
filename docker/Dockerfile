@@ -17,23 +17,20 @@ ENV PERSISTENT_DEPS \
     bash \
     git \
     lz4 \
-    ca-certificates
+    ca-certificates \
+    unzip \
+    fontconfig
 RUN apt-get install -y --no-install-recommends $PERSISTENT_DEPS
 
 # Setup fonts
 ENV FONT_PATH /usr/share/fonts/
-ENV FONT_DEPS \
-    unzip \
-    fontconfig
 RUN mkdir -p $FONT_PATH && \
-    apt-get install -y --no-install-recommends $FONT_DEPS && \
     # Source Code Pro
     wget "https://github.com/adobe-fonts/source-code-pro/releases/download/2.038R-ro%2F1.058R-it%2F1.018R-VAR/OTF-source-code-pro-2.038R-ro-1.058R-it.zip" && \
       unzip OTF-source-code-pro-2.038R-ro-1.058R-it.zip -d source-code-pro && \
       cp source-code-pro/*.otf $FONT_PATH && \
       rm -rf OTF-source-code-pro-2.038R-ro-1.058R-it.zip source-code-pro && \
-    fc-cache -f -v && \
-    apt-get remove -y $FONT_DEPS
+    fc-cache -f -v
 
 # Install Pandoc
 ENV PANDOC_VERSION 2.19
@@ -52,11 +49,7 @@ RUN pip install --upgrade pip && \
 # Install TeXLive
 ARG TEXLIVE_OPTIONS=""
 ENV TEXLIVE_PATH /usr/local/texlive
-ENV TEXLIVE_DEPS \
-    fontconfig \
-    coreutils
-RUN apt-get install -y --no-install-recommends $TEXLIVE_DEPS && \
-    mkdir /tmp/install-tl-unx && \
+RUN mkdir /tmp/install-tl-unx && \
     wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
       tar -xz -C /tmp/install-tl-unx --strip-components=1 && \
     printf "%s\n" \
