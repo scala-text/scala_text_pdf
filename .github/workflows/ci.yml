@@ -1,6 +1,10 @@
 name: CI
 
-on: [pull_request, push]
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -20,17 +24,16 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Get Docker image
-      run: docker-compose pull
-      continue-on-error: true
-
     - name: Build Docker image
       uses: docker/build-push-action@v5
       with:
         file: ./docker/Dockerfile
         platforms: linux/amd64
         push: ${{ github.ref == 'refs/heads/master' }}
+        load: true 
         tags: ghcr.io/scala-text/scala-text-pdf:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
 
     - name: PDF build
       run: |
