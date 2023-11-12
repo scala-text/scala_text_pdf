@@ -7,7 +7,7 @@ ARG TARGETARCH
 RUN apt-get update
 
 ENV PERSISTENT_DEPS \
-    openjdk-8-jdk \
+    openjdk-11-jdk \
     python3-pip \
     wget \
     make \
