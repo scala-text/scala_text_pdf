@@ -30,7 +30,7 @@ jobs:
         file: ./docker/Dockerfile
         platforms: linux/amd64
         push: ${{ github.ref == 'refs/heads/master' }}
-        load: true 
+        load: ${{ github.ref != 'refs/heads/master' }}
         tags: ghcr.io/scala-text/scala-text-pdf:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
