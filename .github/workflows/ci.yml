@@ -41,7 +41,7 @@ jobs:
         docker-compose up --abort-on-container-exit
 
     - name: Push PDF file
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: scala_text pdf
         path: scala_text.pdf
