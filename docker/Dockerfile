@@ -73,7 +73,7 @@ ENV PATH $TEXLIVE_PATH/bin/aarch64-linux:$TEXLIVE_PATH/bin/x86_64-linux:/bin:$PA
 RUN tlmgr $TEXLIVE_OPTIONS install latexmk collection-luatex collection-langjapanese \
       collection-fontsrecommended filehook type1cm mdframed needspace \
       fncychap everyhook svn-prov zref sourcesanspro \
-      cm-unicode sourceserifpro haranoaji && \
+      cm-unicode sourceserifpro haranoaji letltxmacro && \
     luaotfload-tool -u -vvv && \
     rm -fr /tmp/install-tl-unx && \
     apt-get -y clean
