@@ -25,7 +25,6 @@ $ docker-compose up
 ## ライセンス
 
 [Scala Text](https://github.com/scala-text/scala_text)のライセンスを継承し
-[CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.ja)の元で配布されています。
+[CC BY-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.ja)の元で配布されています。
 
-![CC-BY-NC-SA](https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png)
-
+![CC-BY-SA](https://licensebuttons.net/l/by-sa/3.0/88x31.png)
