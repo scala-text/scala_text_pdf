@@ -13,7 +13,7 @@ def mkInputListings(src):
 
 def mkIncludegraphics(src):
     if src == '88x31.png':
-        return RawInline('latex', "\\includegraphics{pdf/by-nc-sa.pdf}")
+        return RawInline('latex', "\\includegraphics{pdf/by-sa.pdf}")
     else:
         return RawInline('latex', "\\includegraphics{img/" + src + "}")
 

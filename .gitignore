@@ -12,6 +12,7 @@
 *.vrb
 *.out
 *.pdf
+!pdf/*.pdf
 *.pdf_tex
 book.json
 target/
