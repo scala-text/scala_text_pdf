@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
 
-$pdflatex = 'lualatex %O %S -halt-on-error';
+$pdflatex = 'lualatex %O -halt-on-error -shell-escape %B';
 $pdf_mode = 3;
 $bibtex = 'pbibtex';

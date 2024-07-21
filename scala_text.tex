@@ -68,6 +68,7 @@
 
 \usepackage{longtable,booktabs}
 \usepackage{graphicx,grffile}
+\usepackage{svg}
 
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>.8\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -103,6 +104,23 @@
 
 % Pandocの画像を適切に表示させるため
 \setkeys{Gin}{keepaspectratio}
+
+% Pandoc用
+% https://github.com/jgm/pandoc/blob/501d7cc02d8ed694e32f26756bc433250d34b193/data/templates/default.latex#L304-L317
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
 
 \begin{document}
 
