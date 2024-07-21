@@ -3,13 +3,16 @@
 
 import re
 import sys
+from pypdf import PdfReader
 
 re_include_graphics = re.compile(
         r'\\includegraphics\[width=\\unitlength,page=(\d+)\]')
 re_end_picture = re.compile(r'\\end\{picture\}')
 
+reader = PdfReader(sys.argv[1])
+num_pages = len(reader.pages)
+
 inside = False
-num_pages = int(sys.argv[1])
 for line in sys.stdin:
     if not inside:
         m = re_include_graphics.search(line)

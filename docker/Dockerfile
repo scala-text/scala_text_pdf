@@ -1,12 +1,10 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 LABEL maintainer="YOSHIMRUA Hikaru <yyu [at] mental.poker>"
 
-ARG TARGETARCH
-
 RUN apt-get update
 
-ENV PERSISTENT_DEPS \
+ENV PERSISTENT_DEPS='\
     openjdk-11-jdk \
     python3-pip \
     wget \
@@ -19,11 +17,13 @@ ENV PERSISTENT_DEPS \
     lz4 \
     ca-certificates \
     unzip \
-    fontconfig
+    fontconfig \
+    python3-pandocfilters \
+    python3-pypdf'
 RUN apt-get install -y --no-install-recommends $PERSISTENT_DEPS
 
 # Setup fonts
-ENV FONT_PATH /usr/share/fonts/
+ENV FONT_PATH=/usr/share/fonts/
 RUN mkdir -p $FONT_PATH && \
     # Source Code Pro
     wget "https://github.com/adobe-fonts/source-code-pro/releases/download/2.038R-ro%2F1.058R-it%2F1.018R-VAR/OTF-source-code-pro-2.038R-ro-1.058R-it.zip" && \
@@ -32,23 +32,19 @@ RUN mkdir -p $FONT_PATH && \
       rm -rf OTF-source-code-pro-2.038R-ro-1.058R-it.zip source-code-pro && \
     fc-cache -f -v
 
+ARG TARGETARCH
+
 # Install Pandoc
-ENV PANDOC_VERSION 2.19
-ENV PANDOC_DOWNLOAD_URL https://github.com/jgm/pandoc/releases/download/$PANDOC_VERSION/pandoc-$PANDOC_VERSION-linux-$TARGETARCH.tar.gz
-ENV PANDOC_ROOT /usr/local/bin/pandoc
+ENV PANDOC_VERSION=3.2.1
+ENV PANDOC_DOWNLOAD_URL="https://github.com/jgm/pandoc/releases/download/$PANDOC_VERSION/pandoc-$PANDOC_VERSION-linux-$TARGETARCH.tar.gz"
+ENV PANDOC_ROOT=/usr/local/bin/pandoc
 RUN wget -qO- "$PANDOC_DOWNLOAD_URL" | tar -xzf - && \
     cp pandoc-$PANDOC_VERSION/bin/pandoc $PANDOC_ROOT && \
     rm -Rf pandoc-$PANDOC_VERSION/
 
-# Install Pandocfilter
-COPY requirements.txt ./
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    rm requirements.txt
-
 # Install TeXLive
 ARG TEXLIVE_OPTIONS=""
-ENV TEXLIVE_PATH /usr/local/texlive
+ENV TEXLIVE_PATH=/usr/local/texlive
 RUN mkdir /tmp/install-tl-unx && \
     wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
       tar -xz -C /tmp/install-tl-unx --strip-components=1 && \
@@ -69,11 +65,11 @@ RUN mkdir /tmp/install-tl-unx && \
         $TEXLIVE_OPTIONS; \
     fi
 
-ENV PATH $TEXLIVE_PATH/bin/aarch64-linux:$TEXLIVE_PATH/bin/x86_64-linux:/bin:$PATH
+ENV PATH="$TEXLIVE_PATH/bin/aarch64-linux:$TEXLIVE_PATH/bin/x86_64-linux:/bin:$PATH"
 RUN tlmgr $TEXLIVE_OPTIONS install latexmk collection-luatex collection-langjapanese \
       collection-fontsrecommended filehook type1cm mdframed needspace \
       fncychap everyhook svn-prov zref sourcesanspro \
-      cm-unicode sourceserifpro haranoaji letltxmacro && \
+      cm-unicode sourceserifpro haranoaji letltxmacro svg transparent catchfile && \
     luaotfload-tool -u -vvv && \
     rm -fr /tmp/install-tl-unx && \
     apt-get -y clean
