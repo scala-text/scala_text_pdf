@@ -39,7 +39,7 @@ jobs:
     - name: PDF build
       run: |
         sudo chown -R root:root $GITHUB_WORKSPACE
-        docker-compose up --abort-on-container-exit
+        docker compose up --abort-on-container-exit
 
     - name: Push PDF file
       uses: actions/upload-artifact@v4
