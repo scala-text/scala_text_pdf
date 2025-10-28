@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v5
 
-    - uses: coursier/cache-action@v6
+    - uses: coursier/cache-action@v7
 
     - name: Set up Docker Build
       uses: docker/setup-buildx-action@v3
