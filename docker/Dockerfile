@@ -5,7 +5,7 @@ LABEL maintainer="YOSHIMRUA Hikaru <yyu [at] mental.poker>"
 RUN apt-get update
 
 ENV PERSISTENT_DEPS='\
-    openjdk-11-jdk \
+    openjdk-17-jdk \
     python3-pip \
     wget \
     make \
