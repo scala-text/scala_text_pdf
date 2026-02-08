@@ -19,7 +19,7 @@ Scala Text PDF
 これらをインストールして、次のコマンドでPDFファイルを作成できます。
 
 ```
-$ docker-compose up
+$ docker compose up
 ```
 
 ## ライセンス
