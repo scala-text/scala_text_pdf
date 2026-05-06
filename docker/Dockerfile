@@ -68,8 +68,8 @@ RUN mkdir /tmp/install-tl-unx && \
 ENV PATH="$TEXLIVE_PATH/bin/aarch64-linux:$TEXLIVE_PATH/bin/x86_64-linux:/bin:$PATH"
 RUN tlmgr $TEXLIVE_OPTIONS install latexmk collection-luatex collection-langjapanese \
       collection-fontsrecommended filehook type1cm mdframed needspace \
-      fncychap everyhook svn-prov zref sourcesanspro \
-      cm-unicode sourceserifpro haranoaji letltxmacro svg transparent catchfile && \
+      fncychap everyhook svn-prov zref sourcesans \
+      cm-unicode sourceserif haranoaji letltxmacro svg transparent catchfile && \
     luaotfload-tool -u -vvv && \
     rm -fr /tmp/install-tl-unx && \
     apt-get -y clean
